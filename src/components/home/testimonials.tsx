@@ -22,7 +22,7 @@ const testimonials = [
 		name: 'David Rodriguez',
 		role: 'Process Engineering Director',
 		company: 'Advanced Materials Inc',
-		image: '/beth.jpg',
+		image: 'https://i.pinimg.com/1200x/f6/f6/89/f6f689ebfa3fd1a3cf080e0fabb5615a.jpg',
 		text: 'Outstanding screening efficiency and build quality. Their engineering team provided exceptional support throughout the entire installation process.',
 		equipment: 'Vibrating Screens & Separators'
 	},

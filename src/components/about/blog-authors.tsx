@@ -8,7 +8,7 @@ const AUTHORS = [
 		expertise: 'Crushing Systems & Rock Processing',
 		experience: '15+ Years Experience',
 		specialization: 'Jaw & Cone Crushers',
-		image: '/valerie.jpg',
+		image: '/logan.jpg',
 		certifications: ['P.Eng', 'MBA'],
 		projects: '200+'
 	},
@@ -18,7 +18,7 @@ const AUTHORS = [
 		expertise: 'High-Intensity Mixing Solutions',
 		experience: '12+ Years Experience',
 		specialization: 'Industrial Mixers & Blenders',
-		image: '/douglas.jpg',
+		image: '/beth.jpg',
 		certifications: ['Ph.D', 'CEM'],
 		projects: '150+'
 	},
@@ -28,7 +28,7 @@ const AUTHORS = [
 		expertise: 'Vibrating Screens & Separation',
 		experience: '18+ Years Experience',
 		specialization: 'Multi-Deck Screening',
-		image: '/beth.jpg',
+		image: 'https://i.pinimg.com/1200x/f6/f6/89/f6f689ebfa3fd1a3cf080e0fabb5615a.jpg',
 		certifications: ['P.Eng', 'PMP'],
 		projects: '300+'
 	},
