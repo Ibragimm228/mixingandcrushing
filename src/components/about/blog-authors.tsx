@@ -214,7 +214,7 @@ export function BlogAuthors() {
 									transition={{ delay: index * 0.2 + 0.4 }}
 									className='flex items-center justify-center gap-3 mb-6'
 								>
-									{author.certifications.map((cert, certIndex) => (
+									{author.certifications.map((cert) => (
 										<motion.div
 											key={cert}
 											whileHover={{ scale: 1.1 }}
