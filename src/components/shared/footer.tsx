@@ -93,11 +93,11 @@ export function Footer() {
 							transition={{ duration: 0.8, delay: 0.2 }}
 							className='lg:col-span-2'
 						>
-							<div className='grid grid-cols-2 md:grid-cols-4 gap-8'>
-								{/* Products */}
+							<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+								{/* Main Navigation */}
 								<div>
 									<h4 className='text-amber-300 font-bold text-sm uppercase tracking-wider mb-6'>
-										Products
+										Navigation
 									</h4>
 									<nav className='space-y-4'>
 										<Link
@@ -108,7 +108,7 @@ export function Footer() {
 												whileHover={{ x: 5 }}
 												className='w-1 h-1 rounded-full bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
 											/>
-											<span>Crushers</span>
+											<span>Home</span>
 										</Link>
 										<Link
 											to='/blog'
@@ -118,7 +118,7 @@ export function Footer() {
 												whileHover={{ x: 5 }}
 												className='w-1 h-1 rounded-full bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
 											/>
-											<span>Mixers</span>
+											<span>Blog</span>
 										</Link>
 										<Link
 											to='/about'
@@ -128,55 +128,7 @@ export function Footer() {
 												whileHover={{ x: 5 }}
 												className='w-1 h-1 rounded-full bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
 											/>
-											<span>Screens</span>
-										</Link>
-									</nav>
-								</div>
-
-								{/* Services */}
-								<div>
-									<h4 className='text-amber-300 font-bold text-sm uppercase tracking-wider mb-6'>
-										Services
-									</h4>
-									<nav className='space-y-4'>
-										<Link
-											to='/contacts'
-											className='group flex items-center gap-2 text-gray-400 hover:text-amber-300 transition-all duration-300'
-										>
-											<motion.div
-												whileHover={{ x: 5 }}
-												className='w-1 h-1 rounded-full bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
-											/>
-											<span>Engineering</span>
-										</Link>
-										<Link
-											to='/privacy-policy'
-											className='group flex items-center gap-2 text-gray-400 hover:text-amber-300 transition-all duration-300'
-										>
-											<motion.div
-												whileHover={{ x: 5 }}
-												className='w-1 h-1 rounded-full bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
-											/>
-											<span>Maintenance</span>
-										</Link>
-									</nav>
-								</div>
-
-								{/* Company */}
-								<div>
-									<h4 className='text-amber-300 font-bold text-sm uppercase tracking-wider mb-6'>
-										Company
-									</h4>
-									<nav className='space-y-4'>
-										<Link
-											to='/about'
-											className='group flex items-center gap-2 text-gray-400 hover:text-amber-300 transition-all duration-300'
-										>
-											<motion.div
-												whileHover={{ x: 5 }}
-												className='w-1 h-1 rounded-full bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
-											/>
-											<span>About Us</span>
+											<span>About</span>
 										</Link>
 										<Link
 											to='/contacts'
@@ -186,7 +138,7 @@ export function Footer() {
 												whileHover={{ x: 5 }}
 												className='w-1 h-1 rounded-full bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
 											/>
-											<span>Contact</span>
+											<span>Contacts</span>
 										</Link>
 									</nav>
 								</div>
@@ -205,17 +157,7 @@ export function Footer() {
 												whileHover={{ x: 5 }}
 												className='w-1 h-1 rounded-full bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
 											/>
-											<span>Privacy</span>
-										</Link>
-										<Link
-											to='/blog'
-											className='group flex items-center gap-2 text-gray-400 hover:text-amber-300 transition-all duration-300'
-										>
-											<motion.div
-												whileHover={{ x: 5 }}
-												className='w-1 h-1 rounded-full bg-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
-											/>
-											<span>Terms</span>
+											<span>Privacy Policy</span>
 										</Link>
 									</nav>
 								</div>

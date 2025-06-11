@@ -1,8 +1,7 @@
 import { ArticleCardCompact } from '@/components/shared/article-card/article-card-compact'
-import { ArticleCardLarge } from '@/components/shared/article-card/article-card-large'
 import { Container } from '@/components/shared/container'
 import { useGetArticles } from '@/hooks/useArticles'
-import { X } from 'lucide-react'
+import { X, Sparkles, TrendingUp } from 'lucide-react'
 import { useNavigate, useSearchParams } from 'react-router'
 
 export function BlogPage() {
@@ -29,130 +28,297 @@ export function BlogPage() {
 		<>
 			<style>
 				{`
-					/* Оптимизированные CSS анимации */
+					/* Современные CSS переменные */
+					:root {
+						--primary-red: #ef4444;
+						--primary-red-dark: #dc2626;
+						--primary-red-light: #fca5a5;
+						--gradient-primary: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 25%, #ff4757 50%, #c44569 75%, #8e44ad 100%);
+						--gradient-secondary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+						--gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+						--shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+						--shadow-glow: 0 0 40px rgba(239, 68, 68, 0.3);
+						--blur-backdrop: blur(20px);
+					}
+
+					/* Основные анимации страницы */
 					.blog-page {
-						animation: pageEntry 0.8s ease-out forwards;
+						animation: pageEntry 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+						position: relative;
+						overflow-x: hidden;
 					}
-					
+
+					/* Компактный герой секшн */
 					.hero-section {
-						animation: heroSlideDown 0.6s ease-out forwards;
+						background: var(--gradient-primary);
+						position: relative;
+						min-height: 45vh;
+						display: flex;
+						align-items: center;
+						overflow: hidden;
 					}
-					
+
+					.hero-section::before {
+						content: '';
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
+						background: 
+							radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+							radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+							radial-gradient(circle at 40% 60%, rgba(255, 107, 107, 0.4) 0%, transparent 40%);
+						animation: gradientShift 8s ease-in-out infinite;
+					}
+
+					.hero-content {
+						position: relative;
+						z-index: 10;
+						text-align: center;
+						color: white;
+					}
+
 					.hero-title {
-						animation: titleFadeUp 0.8s ease-out 0.2s forwards;
+						font-size: clamp(2.5rem, 7vw, 4.5rem);
+						font-weight: 900;
+						margin-bottom: 1.5rem;
+						line-height: 1.1;
+						animation: titleSpectacular 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 						opacity: 0;
+						text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 					}
-					
-					.hero-description {
-						animation: descriptionFadeUp 0.8s ease-out 0.4s forwards;
-						opacity: 0;
-					}
-					
-					.filter-badge {
-						animation: badgeScale 0.6s ease-out 0.6s forwards;
-						opacity: 0;
-						transform: scale(0.8);
-					}
-					
-					.articles-grid {
-						animation: gridFadeUp 0.8s ease-out 0.3s forwards;
-						opacity: 0;
-					}
-					
-					.article-item {
-						opacity: 0;
-						animation: articleStagger 0.6s ease-out forwards;
-					}
-					
-					.article-item:nth-child(1) { animation-delay: 0.5s; }
-					.article-item:nth-child(2) { animation-delay: 0.6s; }
-					.article-item:nth-child(3) { animation-delay: 0.7s; }
-					.article-item:nth-child(4) { animation-delay: 0.8s; }
-					.article-item:nth-child(5) { animation-delay: 0.9s; }
-					.article-item:nth-child(6) { animation-delay: 1s; }
-					.article-item:nth-child(7) { animation-delay: 1.1s; }
-					.article-item:nth-child(8) { animation-delay: 1.2s; }
-					.article-item:nth-child(9) { animation-delay: 1.3s; }
-					.article-item:nth-child(10) { animation-delay: 1.4s; }
-					
-					.no-articles {
-						animation: noArticlesFade 0.8s ease-out forwards;
-						opacity: 0;
-					}
-					
-					.filter-button {
-						transition: all 0.3s ease;
-					}
-					
-					.filter-button:hover {
-						background-color: rgb(254, 226, 226);
-						transform: scale(1.1);
-					}
-					
-					.filter-button:active {
-						transform: scale(0.9);
-					}
-					
-					.filter-icon {
-						transition: transform 0.3s ease;
-					}
-					
-					.filter-button:hover .filter-icon {
-						transform: rotate(90deg);
-					}
-					
+
 					.hero-highlight {
-						background: linear-gradient(135deg, rgb(239, 68, 68), rgb(220, 38, 38));
+						background: linear-gradient(135deg, #fff 0%, #ffeaa7 50%, #fdcb6e 100%);
 						background-clip: text;
 						-webkit-background-clip: text;
 						-webkit-text-fill-color: transparent;
-						animation: highlightPulse 3s ease-in-out infinite;
-					}
-					
-					.article-wrapper {
-						transition: all 0.5s ease;
-					}
-					
-					.article-wrapper:hover {
-						transform: translateY(-8px);
-					}
-					
-					.article-large-card {
-						border-radius: 1rem;
-						overflow: hidden;
-						box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-						transition: all 0.5s ease;
-						border: 1px solid rgba(239, 68, 68, 0.1);
-					}
-					
-					.article-large-card:hover {
-						box-shadow: 0 25px 50px -12px rgba(239, 68, 68, 0.25);
-						transform: scale(1.02);
-						border-color: rgba(239, 68, 68, 0.3);
-					}
-					
-					.article-compact-card {
-						border-radius: 0.75rem;
-						overflow: hidden;
-						box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-						transition: all 0.4s ease;
-						border: 1px solid rgba(239, 68, 68, 0.05);
-					}
-					
-					.article-compact-card:hover {
-						box-shadow: 0 20px 25px -5px rgba(239, 68, 68, 0.15);
-						transform: scale(1.01);
-						border-color: rgba(239, 68, 68, 0.2);
-					}
-					
-					.decorative-bg-1 {
-						animation: floatSlow 8s ease-in-out infinite;
-					}
-					
-					.decorative-bg-2 {
-						animation: floatSlow 8s ease-in-out infinite 4s;
+						position: relative;
+						display: inline-block;
 					}
 
+					.hero-highlight::after {
+						content: '';
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
+						background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(253, 203, 110, 0.8));
+						filter: blur(20px);
+						opacity: 0.6;
+						z-index: -1;
+						animation: glowPulse 3s ease-in-out infinite;
+					}
+
+					.hero-description {
+						font-size: 1.1rem;
+						margin-bottom: 2rem;
+						opacity: 0.95;
+						animation: descriptionSlide 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+						opacity: 0;
+						max-width: 550px;
+						margin-left: auto;
+						margin-right: auto;
+						text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+					}
+
+					/* Фильтр бейдж с glassmorphism эффектом */
+					.filter-badge {
+						background: rgba(255, 255, 255, 0.25);
+						backdrop-filter: var(--blur-backdrop);
+						border: 1px solid rgba(255, 255, 255, 0.3);
+						border-radius: 50px;
+						padding: 0.75rem 1.5rem;
+						display: inline-flex;
+						align-items: center;
+						gap: 0.75rem;
+						color: white;
+						font-weight: 600;
+						box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+						animation: badgeFloat 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+						opacity: 0;
+						transform: translateY(20px);
+					}
+
+					.filter-button {
+						background: rgba(255, 255, 255, 0.2);
+						border: none;
+						border-radius: 50%;
+						width: 28px;
+						height: 28px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+						cursor: pointer;
+					}
+
+					.filter-button:hover {
+						background: rgba(255, 255, 255, 0.4);
+						transform: scale(1.1) rotate(90deg);
+					}
+
+					/* Плавающие декоративные элементы */
+					.floating-element {
+						position: absolute;
+						border-radius: 50%;
+						background: rgba(255, 255, 255, 0.1);
+						backdrop-filter: blur(10px);
+					}
+
+					.floating-1 {
+						width: 60px;
+						height: 60px;
+						top: 25%;
+						left: 12%;
+						animation: float1 6s ease-in-out infinite;
+					}
+
+					.floating-2 {
+						width: 80px;
+						height: 80px;
+						top: 65%;
+						right: 18%;
+						animation: float2 8s ease-in-out infinite 2s;
+					}
+
+					.floating-3 {
+						width: 45px;
+						height: 45px;
+						bottom: 25%;
+						left: 25%;
+						animation: float3 7s ease-in-out infinite 4s;
+					}
+
+					/* Компактная секция статей */
+					.articles-section {
+						background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+						position: relative;
+						padding: 4rem 0 6rem;
+					}
+
+					.articles-section::before {
+						content: '';
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						height: 120px;
+						background: linear-gradient(180deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%);
+					}
+
+					/* Единообразная сетка карточек */
+					.articles-grid {
+						display: grid;
+						grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+						gap: 1.5rem;
+						animation: gridReveal 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+						opacity: 0;
+						transform: translateY(30px);
+					}
+
+					.article-item {
+						opacity: 0;
+						transform: translateY(30px) scale(0.98);
+						animation: articleReveal 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+					}
+
+					/* Единообразные карточки статей */
+					.article-card {
+						background: white;
+						border-radius: 18px;
+						overflow: hidden;
+						box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+						border: 1px solid rgba(239, 68, 68, 0.08);
+						transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+						position: relative;
+						height: 100%;
+						display: flex;
+						flex-direction: column;
+					}
+
+					.article-card::before {
+						content: '';
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
+						background: var(--gradient-primary);
+						opacity: 0;
+						transition: opacity 0.5s ease;
+						z-index: 0;
+					}
+
+					.article-card:hover {
+						transform: translateY(-12px) scale(1.015);
+						box-shadow: 0 20px 50px rgba(239, 68, 68, 0.15);
+						border-color: rgba(239, 68, 68, 0.2);
+					}
+
+					.article-card:hover::before {
+						opacity: 0.03;
+					}
+
+					/* Обеспечиваем одинаковую высоту всех компонентов карточек */
+					.article-card > * {
+						position: relative;
+						z-index: 1;
+					}
+
+					/* Компактная пустая страница */
+					.no-articles {
+						text-align: center;
+						padding: 4rem 0;
+						animation: noArticlesReveal 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+						opacity: 0;
+					}
+
+					.no-articles-icon {
+						width: 100px;
+						height: 100px;
+						margin: 0 auto 1.5rem;
+						background: var(--gradient-accent);
+						border-radius: 50%;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						box-shadow: var(--shadow-xl);
+						animation: iconBounce 2s ease-in-out infinite;
+					}
+
+					.no-articles-title {
+						font-size: 2rem;
+						font-weight: 800;
+						margin-bottom: 1rem;
+						background: var(--gradient-primary);
+						background-clip: text;
+						-webkit-background-clip: text;
+						-webkit-text-fill-color: transparent;
+					}
+
+					.cta-button {
+						background: var(--gradient-primary);
+						color: white;
+						border: none;
+						padding: 0.875rem 2rem;
+						border-radius: 50px;
+						font-weight: 600;
+						font-size: 1rem;
+						box-shadow: 0 6px 20px rgba(239, 68, 68, 0.25);
+						transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+						cursor: pointer;
+						margin-top: 1.5rem;
+					}
+
+					.cta-button:hover {
+						transform: translateY(-2px) scale(1.05);
+						box-shadow: 0 12px 30px rgba(239, 68, 68, 0.35);
+					}
+
+					/* Keyframes для анимаций */
 					@keyframes pageEntry {
 						from {
 							opacity: 0;
@@ -163,30 +329,78 @@ export function BlogPage() {
 							transform: translateY(0);
 						}
 					}
-					
-					@keyframes heroSlideDown {
+
+					@keyframes gradientShift {
+						0%, 100% { transform: scale(1) rotate(0deg); }
+						50% { transform: scale(1.05) rotate(3deg); }
+					}
+
+					@keyframes titleSpectacular {
 						from {
 							opacity: 0;
-							transform: translateY(-30px);
+							transform: translateY(40px) scale(0.95);
+						}
+						60% {
+							opacity: 1;
+							transform: translateY(-5px) scale(1.02);
+						}
+						to {
+							opacity: 1;
+							transform: translateY(0) scale(1);
+						}
+					}
+
+					@keyframes descriptionSlide {
+						from {
+							opacity: 0;
+							transform: translateY(25px);
+						}
+						to {
+							opacity: 0.95;
+							transform: translateY(0);
+						}
+					}
+
+					@keyframes badgeFloat {
+						from {
+							opacity: 0;
+							transform: translateY(15px);
 						}
 						to {
 							opacity: 1;
 							transform: translateY(0);
 						}
 					}
-					
-					@keyframes titleFadeUp {
-						from {
-							opacity: 0;
-							transform: translateY(40px);
+
+					@keyframes glowPulse {
+						0%, 100% {
+							opacity: 0.6;
+							transform: scale(1);
 						}
-						to {
-							opacity: 1;
-							transform: translateY(0);
+						50% {
+							opacity: 0.85;
+							transform: scale(1.05);
 						}
 					}
-					
-					@keyframes descriptionFadeUp {
+
+					@keyframes float1 {
+						0%, 100% { transform: translateY(0px) rotate(0deg); }
+						33% { transform: translateY(-15px) rotate(120deg); }
+						66% { transform: translateY(8px) rotate(240deg); }
+					}
+
+					@keyframes float2 {
+						0%, 100% { transform: translateY(0px) rotate(0deg); }
+						50% { transform: translateY(-20px) rotate(180deg); }
+					}
+
+					@keyframes float3 {
+						0%, 100% { transform: translateY(0px) rotate(0deg); }
+						25% { transform: translateY(-10px) rotate(90deg); }
+						75% { transform: translateY(10px) rotate(270deg); }
+					}
+
+					@keyframes gridReveal {
 						from {
 							opacity: 0;
 							transform: translateY(30px);
@@ -196,110 +410,135 @@ export function BlogPage() {
 							transform: translateY(0);
 						}
 					}
-					
-					@keyframes badgeScale {
+
+					@keyframes articleReveal {
 						from {
 							opacity: 0;
-							transform: scale(0.8);
-						}
-						60% {
-							transform: scale(1.1);
-						}
-						to {
-							opacity: 1;
-							transform: scale(1);
-						}
-					}
-					
-					@keyframes gridFadeUp {
-						from {
-							opacity: 0;
-							transform: translateY(50px);
-						}
-						to {
-							opacity: 1;
-							transform: translateY(0);
-						}
-					}
-					
-					@keyframes articleStagger {
-						from {
-							opacity: 0;
-							transform: translateY(60px) scale(0.95);
+							transform: translateY(30px) scale(0.98);
 						}
 						60% {
 							opacity: 1;
-							transform: translateY(-10px) scale(1.02);
+							transform: translateY(-5px) scale(1.01);
 						}
 						to {
 							opacity: 1;
 							transform: translateY(0) scale(1);
 						}
 					}
-					
-					@keyframes noArticlesFade {
+
+					@keyframes noArticlesReveal {
 						from {
 							opacity: 0;
-							transform: translateY(40px);
+							transform: translateY(30px);
 						}
 						to {
 							opacity: 1;
 							transform: translateY(0);
 						}
 					}
-					
-					@keyframes highlightPulse {
-						0%, 100% {
-							filter: brightness(1);
-							text-shadow: none;
-						}
-						50% {
-							filter: brightness(1.2);
-							text-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+
+					@keyframes iconBounce {
+						0%, 100% { transform: translateY(0px); }
+						50% { transform: translateY(-8px); }
+					}
+
+					/* Адаптивность для единообразных карточек */
+					@media (max-width: 1200px) {
+						.articles-grid {
+							grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 						}
 					}
-					
-					@keyframes floatSlow {
-						0%, 100% {
-							transform: translateY(0) scale(1);
+
+					@media (max-width: 768px) {
+						.hero-title {
+							font-size: clamp(1.75rem, 7vw, 2.5rem);
+							margin-bottom: 1rem;
 						}
-						50% {
-							transform: translateY(-20px) scale(1.05);
+						
+						.hero-description {
+							font-size: 1rem;
+							margin-bottom: 1.5rem;
+						}
+						
+						.articles-grid {
+							grid-template-columns: 1fr;
+							gap: 1rem;
+						}
+						
+						.hero-section {
+							min-height: 40vh;
+							padding: 3rem 0;
+						}
+
+						.articles-section {
+							padding: 3rem 0 4rem;
+						}
+
+						.floating-element {
+							display: none;
 						}
 					}
+
+					@media (max-width: 480px) {
+						.articles-grid {
+							grid-template-columns: 1fr;
+							gap: 1rem;
+						}
+
+						.hero-section {
+							min-height: 35vh;
+							padding: 2rem 0;
+						}
+
+						.articles-section {
+							padding: 2rem 0 3rem;
+						}
+					}
+
+					/* Динамические задержки для статей - компактные */
+					${Array.from({ length: 15 }, (_, i) => `
+						.article-item:nth-child(${i + 1}) {
+							animation-delay: ${0.05 + i * 0.08}s;
+						}
+					`).join('')}
 				`}
 			</style>
-
+			
 			<div className='blog-page'>
-				{/* Hero Section */}
-				<section className='hero-section relative py-20 bg-gradient-to-br from-red-50 to-white overflow-hidden'>
-					{/* Декоративные фоновые элементы */}
-					<div className='decorative-bg-1 absolute top-0 right-0 w-96 h-96 bg-gradient-radial from-red-100/60 to-transparent rounded-full blur-3xl' />
-					<div className='decorative-bg-2 absolute bottom-0 left-0 w-80 h-80 bg-gradient-radial from-red-50/80 to-transparent rounded-full blur-3xl' />
+				{/* Компактный Hero Section */}
+				<section className='hero-section'>
+					{/* Плавающие декоративные элементы */}
+					<div className='floating-element floating-1' />
+					<div className='floating-element floating-2' />
+					<div className='floating-element floating-3' />
 					
-					{/* Дополнительные декоративные элементы */}
-					<div className='absolute top-1/4 left-1/4 w-2 h-2 bg-red-300 rounded-full opacity-30' />
-					<div className='absolute top-3/4 right-1/3 w-1 h-1 bg-red-400 rounded-full opacity-40' />
-					<div className='absolute top-1/2 right-1/4 w-1.5 h-1.5 bg-red-200 rounded-full opacity-25' />
+					{/* Дополнительные световые эффекты */}
+					<div className='absolute top-0 left-1/4 w-72 h-72 bg-white opacity-8 rounded-full blur-3xl' />
+					<div className='absolute bottom-0 right-1/4 w-60 h-60 bg-yellow-200 opacity-15 rounded-full blur-3xl' />
 					
 					<Container>
-						<div className='text-center max-w-3xl mx-auto relative z-10'>
-							<h1 className='hero-title text-5xl font-bold mb-6 text-gray-800'>
-								Our Latest <span className='hero-highlight'>Articles</span>
+						<div className='hero-content'>
+							<h1 className='hero-title'>
+								Discover Amazing{' '}
+								<span className='hero-highlight'>
+									<Sparkles className='inline-block w-8 h-8 mb-1' />
+									Articles
+								</span>
 							</h1>
-							<p className='hero-description text-xl text-gray-600 mb-8 leading-relaxed'>
-								Stay informed with the latest insights, tips, and updates from our
-								team of phlebotomy experts.
+							<p className='hero-description'>
+								Dive into a world of knowledge with our carefully curated collection 
+								of expert insights, industry trends, and breakthrough discoveries.
 							</p>
 							{type && (
-								<div className='filter-badge inline-flex items-center gap-2 px-4 py-2 bg-red-100 text-red-600 rounded-full text-sm font-medium shadow-lg'>
-									<span>Filtered by: <strong>{type}</strong></span>
+								<div className='filter-badge'>
+									<TrendingUp className='w-4 h-4' />
+									<span>Exploring: <strong>{type}</strong></span>
 									<button
 										onClick={clearFilter}
-										className='filter-button p-1 hover:bg-red-200 rounded-full transition-colors'
+										className='filter-button'
 										aria-label='Clear filter'
 									>
-										<X className='filter-icon w-4 h-4' />
+										<X className='w-3 h-3' />
 									</button>
 								</div>
 							)}
@@ -307,56 +546,44 @@ export function BlogPage() {
 					</Container>
 				</section>
 
-				{/* Articles Section */}
-				<section className='py-16 bg-white relative'>
-					{/* Subtle background pattern */}
-					<div className='absolute inset-0 opacity-5 bg-[url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ef4444" fill-opacity="0.4"%3E%3Ccircle cx="30" cy="30" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")]' />
-					
+				{/* Компактная секция статей с единообразными карточками */}
+				<section className='articles-section'>
 					<Container>
-						<div className='articles-grid grid grid-cols-1 gap-8 relative z-10'>
+						<div className='articles-grid'>
 							{articles?.map((article, index) => (
 								<div
 									key={article.id}
-									className='article-item article-wrapper'
+									className='article-item'
+									style={{ animationDelay: `${0.05 + index * 0.08}s` }}
 								>
-									{index % 4 === 0 ? (
-										<div className='article-large-card'>
-											<ArticleCardLarge article={article} />
-										</div>
-									) : (
-										<div className='article-compact-card'>
-											<ArticleCardCompact article={article} />
-										</div>
-									)}
+									<div className='article-card'>
+										<ArticleCardCompact article={article} />
+									</div>
 								</div>
 							))}
 						</div>
 
 						{articles?.length === 0 && (
-							<div className='no-articles text-center py-12'>
-								<div className='max-w-md mx-auto'>
-									<div className='w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center'>
-										<svg className='w-8 h-8 text-red-500' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-											<path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' />
-										</svg>
-									</div>
-									<h3 className='text-2xl font-semibold text-gray-800 mb-4'>
-										No articles found
-									</h3>
-									<p className='text-gray-600 leading-relaxed'>
-										{type
-											? `No articles found in the "${type}" category. Try removing the filter to see all available articles.`
-											: 'No articles available at the moment. Please check back later for new content.'}
-									</p>
-									{type && (
-										<button
-											onClick={clearFilter}
-											className='mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium'
-										>
-											Show All Articles
-										</button>
-									)}
+							<div className='no-articles'>
+								<div className='no-articles-icon'>
+									<Sparkles className='w-10 h-10 text-white' />
 								</div>
+								<h3 className='no-articles-title'>
+									Ready for Amazing Content?
+								</h3>
+								<p className='text-lg text-gray-600 leading-relaxed max-w-xl mx-auto'>
+									{type
+										? `We're preparing incredible "${type}" articles just for you. Meanwhile, explore our full collection!`
+										: 'Our team of experts is crafting exceptional articles. Stay tuned for incredible insights coming your way!'}
+								</p>
+								{type && (
+									<button
+										onClick={clearFilter}
+										className='cta-button'
+									>
+										🚀 Explore All Articles
+									</button>
+								)}
 							</div>
 						)}
 					</Container>
