@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 const AUTHORS = [
 	{
-		name: 'Marcus Chen',
+		name: 'Ryan Hall',
 		role: 'Chief Engineering Officer',
 		expertise: 'Crushing Systems & Rock Processing',
 		experience: '15+ Years Experience',
@@ -13,7 +13,7 @@ const AUTHORS = [
 		projects: '200+'
 	},
 	{
-		name: 'Sarah Thompson',
+		name: 'Amelia Reed',
 		role: 'Mixing Technology Director',
 		expertise: 'High-Intensity Mixing Solutions',
 		experience: '12+ Years Experience',
@@ -23,7 +23,7 @@ const AUTHORS = [
 		projects: '150+'
 	},
 	{
-		name: 'David Rodriguez',
+		name: 'Caleb Hughes',
 		role: 'Screening Systems Expert',
 		expertise: 'Vibrating Screens & Separation',
 		experience: '18+ Years Experience',
