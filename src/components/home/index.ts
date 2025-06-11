@@ -1,0 +1,7 @@
+export { FAQ } from '@/components/home/faq'
+export { FeaturedArticles } from '@/components/home/featured-articles'
+export { Features } from '@/components/home/features'
+export { Hero } from '@/components/home/hero'
+export { LatestArticles } from '@/components/home/latest-articles'
+export { Testimonials } from '@/components/home/testimonials'
+export { WhyUs } from '@/components/home/why-us'

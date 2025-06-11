@@ -1,0 +1,5 @@
+export { AboutHero } from '@/components/about/about-hero'
+export { BlogAuthors } from '@/components/about/blog-authors'
+export { ContactUs } from '@/components/about/contact-us'
+export { OurMission } from '@/components/about/our-mission'
+export { Stats } from '@/components/about/stats'
