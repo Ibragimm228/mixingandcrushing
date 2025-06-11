@@ -1,5 +1,3 @@
-import { fadeInUp } from '@/lib/animations'
-import { AnimatePresence, motion } from 'framer-motion'
 import type { FC } from 'react'
 import { useState } from 'react'
 import { Container } from '../shared/container'
@@ -37,30 +35,147 @@ export const FAQ: FC = () => {
 
 	return (
 		<section className='py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden'>
-			{/* Industrial background pattern */}
+			<style>
+				{`
+					/* Оптимизированные CSS анимации */
+					.faq-header {
+						animation: fadeInUp 0.8s ease-out forwards;
+					}
+					
+					.faq-badge {
+						animation: fadeInScale 1s ease-out 0.2s forwards;
+						opacity: 0;
+					}
+					
+					.faq-item {
+						animation: fadeInUp 0.6s ease-out forwards;
+						opacity: 0;
+					}
+					
+					.faq-item:nth-child(1) { animation-delay: 0.1s; }
+					.faq-item:nth-child(2) { animation-delay: 0.25s; }
+					.faq-item:nth-child(3) { animation-delay: 0.4s; }
+					.faq-item:nth-child(4) { animation-delay: 0.55s; }
+					.faq-item:nth-child(5) { animation-delay: 0.7s; }
+					
+					.faq-card {
+						transition: all 0.3s ease;
+					}
+					
+					.faq-card:hover {
+						transform: scale(1.02);
+						box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.1);
+					}
+					
+					.faq-card:hover .gradient-border {
+						opacity: 1;
+					}
+					
+					.faq-card:hover .question-text {
+						color: rgb(252 211 77);
+					}
+					
+					.faq-button {
+						transition: all 0.2s ease;
+					}
+					
+					.faq-button:active {
+						transform: scale(0.98);
+					}
+					
+					.icon-container {
+						transition: all 0.3s ease;
+					}
+					
+					.icon-container.open {
+						transform: rotate(90deg) scale(1.1);
+					}
+					
+					.chevron-icon {
+						transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+					}
+					
+					.chevron-icon.open {
+						transform: rotate(180deg);
+					}
+					
+					.answer-content {
+						max-height: 0;
+						opacity: 0;
+						overflow: hidden;
+						transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+					}
+					
+					.answer-content.open {
+						max-height: 500px;
+						opacity: 1;
+					}
+					
+					.answer-inner {
+						transform: translateY(-20px);
+						transition: transform 0.3s ease 0.1s;
+					}
+					
+					.answer-content.open .answer-inner {
+						transform: translateY(0);
+					}
+					
+					.pulse-dot {
+						animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+					}
+					
+					.consultation-footer {
+						animation: fadeInUp 0.8s ease-out 0.6s forwards;
+						opacity: 0;
+					}
+
+					@keyframes fadeInUp {
+						from {
+							opacity: 0;
+							transform: translateY(30px);
+						}
+						to {
+							opacity: 1;
+							transform: translateY(0);
+						}
+					}
+					
+					@keyframes fadeInScale {
+						from {
+							opacity: 0;
+							transform: scale(0.8);
+						}
+						to {
+							opacity: 1;
+							transform: scale(1);
+						}
+					}
+					
+					@keyframes pulse {
+						0%, 100% {
+							opacity: 1;
+						}
+						50% {
+							opacity: 0.5;
+						}
+					}
+				`}
+			</style>
+
+			{/* Упрощенный background pattern */}
 			<div className='absolute inset-0 opacity-5'>
-				<div className='absolute inset-0 bg-[url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Ccircle cx="7" cy="7" r="1"/%3E%3Ccircle cx="27" cy="7" r="1"/%3E%3Ccircle cx="47" cy="7" r="1"/%3E%3Ccircle cx="7" cy="27" r="1"/%3E%3Ccircle cx="27" cy="27" r="1"/%3E%3Ccircle cx="47" cy="27" r="1"/%3E%3Ccircle cx="7" cy="47" r="1"/%3E%3Ccircle cx="27" cy="47" r="1"/%3E%3Ccircle cx="47" cy="47" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")]' />
+				<div className='absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,_white_1px,_transparent_0)]' 
+					 style={{ backgroundSize: '60px 60px' }} />
 			</div>
 
 			<Container>
-				<motion.div
-					initial={{ opacity: 0, y: -30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					className='text-center mb-20'
-				>
-					<motion.div
-						initial={{ scale: 0.8, opacity: 0 }}
-						whileInView={{ scale: 1, opacity: 1 }}
-						viewport={{ once: true }}
-						transition={{ delay: 0.2 }}
-						className='inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 mb-6'
-					>
-						<div className='w-2 h-2 rounded-full bg-amber-400 animate-pulse' />
+				<div className='faq-header text-center mb-20'>
+					<div className='faq-badge inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 mb-6'>
+						<div className='pulse-dot w-2 h-2 rounded-full bg-amber-400' />
 						<span className='text-amber-300 font-semibold text-sm uppercase tracking-wider'>
 							ENGINEERING EXPERTISE
 						</span>
-					</motion.div>
+					</div>
 					
 					<h2 className='text-5xl md:text-6xl font-black mb-6'>
 						<span className='bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent'>
@@ -75,40 +190,21 @@ export const FAQ: FC = () => {
 					<p className='text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed'>
 						Expert answers to your mixing, crushing, and screening engineering questions
 					</p>
-				</motion.div>
+				</div>
 
 				<div className='max-w-4xl mx-auto'>
 					{faqs.map((faq, index) => (
-						<motion.div
-							key={index}
-							variants={fadeInUp}
-							initial='hidden'
-							whileInView='visible'
-							viewport={{ once: true }}
-							transition={{ delay: index * 0.15 }}
-							className='mb-6 group'
-						>
-							<motion.div
-								whileHover={{ scale: 1.02 }}
-								className='relative backdrop-blur-sm bg-gradient-to-r from-slate-800/80 to-slate-700/80 border border-slate-600/50 rounded-2xl overflow-hidden shadow-2xl hover:shadow-amber-500/10 transition-all duration-500'
-							>
+						<div key={index} className='faq-item mb-6 group'>
+							<div className='faq-card relative backdrop-blur-sm bg-gradient-to-r from-slate-800/80 to-slate-700/80 border border-slate-600/50 rounded-2xl overflow-hidden shadow-2xl'>
 								{/* Gradient border effect */}
-								<div className='absolute inset-0 bg-gradient-to-r from-amber-500/20 via-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
+								<div className='gradient-border absolute inset-0 bg-gradient-to-r from-amber-500/20 via-transparent to-orange-500/20 opacity-0 transition-opacity duration-500' />
 								
-								<motion.button
-									whileTap={{ scale: 0.98 }}
-									className='w-full px-8 py-6 text-left flex justify-between items-center relative z-10'
+								<button
+									className='faq-button w-full px-8 py-6 text-left flex justify-between items-center relative z-10'
 									onClick={() => setOpenIndex(openIndex === index ? null : index)}
 								>
 									<div className='flex items-center gap-4'>
-										<motion.div
-											animate={{ 
-												rotate: openIndex === index ? 90 : 0,
-												scale: openIndex === index ? 1.1 : 1 
-											}}
-											transition={{ duration: 0.3 }}
-											className='w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg'
-										>
+										<div className={`icon-container w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg ${openIndex === index ? 'open' : ''}`}>
 											<svg
 												className='w-6 h-6 text-white'
 												fill='none'
@@ -122,10 +218,10 @@ export const FAQ: FC = () => {
 													d='M12 4v16M4 12h16'
 												/>
 											</svg>
-										</motion.div>
+										</div>
 										
 										<div>
-											<span className='text-xl font-bold text-white group-hover:text-amber-300 transition-colors duration-300'>
+											<span className='question-text text-xl font-bold text-white transition-colors duration-300'>
 												{faq.question}
 											</span>
 											<div className='text-sm text-gray-400 mt-1'>
@@ -134,13 +230,9 @@ export const FAQ: FC = () => {
 										</div>
 									</div>
 
-									<motion.div
-										animate={{ rotate: openIndex === index ? 180 : 0 }}
-										transition={{ duration: 0.4, type: 'spring', stiffness: 200 }}
-										className='w-8 h-8 rounded-full bg-slate-600 flex items-center justify-center'
-									>
+									<div className='w-8 h-8 rounded-full bg-slate-600 flex items-center justify-center'>
 										<svg
-											className='w-5 h-5 text-amber-400'
+											className={`chevron-icon w-5 h-5 text-amber-400 ${openIndex === index ? 'open' : ''}`}
 											fill='none'
 											stroke='currentColor'
 											viewBox='0 0 24 24'
@@ -152,55 +244,33 @@ export const FAQ: FC = () => {
 												d='M19 9l-7 7-7-7'
 											/>
 										</svg>
-									</motion.div>
-								</motion.button>
+									</div>
+								</button>
 
-								<AnimatePresence>
-									{openIndex === index && (
-										<motion.div
-											initial={{ height: 0, opacity: 0 }}
-											animate={{ height: 'auto', opacity: 1 }}
-											exit={{ height: 0, opacity: 0 }}
-											transition={{ duration: 0.4, ease: 'easeInOut' }}
-											className='overflow-hidden relative z-10'
-										>
-											<motion.div
-												initial={{ opacity: 0, y: -20 }}
-												animate={{ opacity: 1, y: 0 }}
-												exit={{ opacity: 0, y: -20 }}
-												transition={{ delay: 0.1, duration: 0.3 }}
-												className='px-8 pb-8'
-											>
-												<div className='w-full h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent mb-6' />
-												
-												<div className='flex gap-4'>
-													<div className='w-1 h-full bg-gradient-to-b from-amber-500 to-orange-600 rounded-full flex-shrink-0' />
-													<p className='text-gray-300 leading-relaxed text-lg'>
-														{faq.answer}
-													</p>
-												</div>
-											</motion.div>
-										</motion.div>
-									)}
-								</AnimatePresence>
-							</motion.div>
-						</motion.div>
+								<div className={`answer-content relative z-10 ${openIndex === index ? 'open' : ''}`}>
+									<div className='answer-inner px-8 pb-8'>
+										<div className='w-full h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent mb-6' />
+										
+										<div className='flex gap-4'>
+											<div className='w-1 h-full bg-gradient-to-b from-amber-500 to-orange-600 rounded-full flex-shrink-0' />
+											<p className='text-gray-300 leading-relaxed text-lg'>
+												{faq.answer}
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					))}
 				</div>
 
-				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					transition={{ delay: 0.6 }}
-					className='text-center mt-16'
-				>
+				<div className='consultation-footer text-center mt-16'>
 					<div className='inline-flex items-center gap-2 text-gray-400'>
 						<div className='w-12 h-px bg-gradient-to-r from-transparent to-amber-500/50' />
 						<span className='text-sm font-medium'>Need specific technical consultation?</span>
 						<div className='w-12 h-px bg-gradient-to-l from-transparent to-amber-500/50' />
 					</div>
-				</motion.div>
+				</div>
 			</Container>
 		</section>
 	)

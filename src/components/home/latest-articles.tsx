@@ -1,5 +1,4 @@
 import type { FC } from 'react'
-import { motion } from 'framer-motion'
 import { ArticleCardCompact } from '../shared/article-card/article-card-compact'
 import { useGetArticles } from '@/hooks/useArticles'
 import { Container } from '../shared/container'
@@ -17,55 +16,308 @@ export const LatestArticles: FC = () => {
 	return (
 		latestArticles && (
 			<section className='py-28 bg-gradient-to-br from-slate-950 via-gray-900 to-slate-900 relative overflow-hidden'>
+				<style>
+					{`
+						/* Оптимизированные CSS анимации */
+						.latest-section {
+							animation: fadeIn 1s ease-out forwards;
+						}
+						
+						.section-header {
+							animation: slideDown 0.8s ease-out forwards;
+						}
+						
+						.industry-badge {
+							animation: scaleIn 0.6s ease-out 0.2s forwards;
+							opacity: 0;
+						}
+						
+						.badge-icon {
+							animation: badgeRotate 3s ease-in-out infinite;
+						}
+						
+						.main-heading {
+							animation: slideUp 0.8s ease-out 0.4s forwards;
+							opacity: 0;
+						}
+						
+						.subtitle-content {
+							animation: slideUp 0.8s ease-out 0.6s forwards;
+							opacity: 0;
+						}
+						
+						.rotating-spinner {
+							animation: rotate 4s linear infinite;
+						}
+						
+						.pulse-dot-green {
+							animation: pulse 2s ease-in-out infinite;
+						}
+						
+						.pulse-dot-blue {
+							animation: pulse 2s ease-in-out infinite 1s;
+						}
+						
+						.articles-container {
+							animation: slideUp 1s ease-out 0.8s forwards;
+							opacity: 0;
+						}
+						
+						.article-item-0 {
+							animation: slideInLeft 0.8s ease-out 1s forwards;
+							opacity: 0;
+						}
+						
+						.article-item-1 {
+							animation: slideInRight 0.8s ease-out 1.1s forwards;
+							opacity: 0;
+						}
+						
+						.article-item-2 {
+							animation: slideInLeft 0.8s ease-out 1.2s forwards;
+							opacity: 0;
+						}
+						
+						.article-item-3 {
+							animation: slideInRight 0.8s ease-out 1.3s forwards;
+							opacity: 0;
+						}
+						
+						.article-item-4 {
+							animation: slideInLeft 0.8s ease-out 1.4s forwards;
+							opacity: 0;
+						}
+						
+						.article-item-5 {
+							animation: slideInRight 0.8s ease-out 1.5s forwards;
+							opacity: 0;
+						}
+						
+						.bottom-section {
+							animation: slideUp 0.8s ease-out 1.2s forwards;
+							opacity: 0;
+						}
+						
+						.rotating-machinery {
+							animation: rotateMachinery 25s linear infinite;
+						}
+						
+						.rotating-gear-1 {
+							animation: rotateGearForward 6s ease-in-out infinite;
+						}
+						
+						.rotating-gear-2 {
+							animation: rotateGearReverse 6s ease-in-out infinite 3s;
+						}
+						
+						.article-card {
+							transition: all 0.5s ease;
+						}
+						
+						.article-card:hover {
+							transform: scale(1.02);
+							border-color: rgba(251, 191, 36, 0.3);
+							box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.1);
+						}
+						
+						.article-card:hover .glow-effect {
+							opacity: 1;
+						}
+						
+						.article-card:hover .corner-accent {
+							opacity: 1;
+						}
+						
+						.article-number {
+							transition: all 0.3s ease;
+						}
+						
+						.article-card:hover .article-number {
+							transform: scale(1.1) rotate(5deg);
+						}
+						
+						.glow-effect {
+							opacity: 0;
+							transition: opacity 0.5s ease;
+						}
+						
+						.corner-accent {
+							opacity: 0;
+							transition: opacity 0.3s ease;
+						}
+						
+						.cta-button {
+							transition: all 0.3s ease;
+						}
+						
+						.cta-button:hover {
+							transform: scale(1.05) translateY(-2px);
+							box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.4);
+						}
+						
+						.cta-button:active {
+							transform: scale(0.95);
+						}
+						
+						.cta-button:hover .button-overlay {
+							opacity: 1;
+						}
+						
+						.button-overlay {
+							opacity: 0;
+							transition: opacity 0.3s ease;
+						}
+
+						@keyframes fadeIn {
+							from {
+								opacity: 0;
+							}
+							to {
+								opacity: 1;
+							}
+						}
+						
+						@keyframes slideDown {
+							from {
+								opacity: 0;
+								transform: translateY(-40px);
+							}
+							to {
+								opacity: 1;
+								transform: translateY(0);
+							}
+						}
+						
+						@keyframes scaleIn {
+							from {
+								opacity: 0;
+								transform: scale(0.8);
+							}
+							to {
+								opacity: 1;
+								transform: scale(1);
+							}
+						}
+						
+						@keyframes slideUp {
+							from {
+								opacity: 0;
+								transform: translateY(30px);
+							}
+							to {
+								opacity: 1;
+								transform: translateY(0);
+							}
+						}
+						
+						@keyframes slideInLeft {
+							from {
+								opacity: 0;
+								transform: translateX(-60px);
+							}
+							to {
+								opacity: 1;
+								transform: translateX(0);
+							}
+						}
+						
+						@keyframes slideInRight {
+							from {
+								opacity: 0;
+								transform: translateX(60px);
+							}
+							to {
+								opacity: 1;
+								transform: translateX(0);
+							}
+						}
+						
+						@keyframes badgeRotate {
+							0%, 100% {
+								transform: scale(1) rotate(0deg);
+							}
+							25% {
+								transform: scale(1.2) rotate(180deg);
+							}
+							50% {
+								transform: scale(1) rotate(360deg);
+							}
+						}
+						
+						@keyframes rotate {
+							from {
+								transform: rotate(0deg);
+							}
+							to {
+								transform: rotate(360deg);
+							}
+						}
+						
+						@keyframes rotateMachinery {
+							from {
+								transform: rotate(0deg);
+							}
+							to {
+								transform: rotate(360deg);
+							}
+						}
+						
+						@keyframes rotateGearForward {
+							0%, 100% {
+								transform: rotate(0deg) scale(1);
+							}
+							50% {
+								transform: rotate(360deg) scale(1.1);
+							}
+						}
+						
+						@keyframes rotateGearReverse {
+							0%, 100% {
+								transform: rotate(360deg) scale(1);
+							}
+							50% {
+								transform: rotate(0deg) scale(1.1);
+							}
+						}
+						
+						@keyframes pulse {
+							0%, 100% {
+								opacity: 1;
+								transform: scale(1);
+							}
+							50% {
+								opacity: 0.5;
+								transform: scale(1.2);
+							}
+						}
+					`}
+				</style>
+
 				{/* Industrial background elements */}
 				<div className='absolute inset-0'>
-					<div className='absolute top-0 left-0 w-full h-full bg-[url("data:image/svg+xml,%3Csvg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.02"%3E%3Cpath d="M60 60L30 30L60 0L90 30L60 60ZM60 120L30 90L60 60L90 90L60 120Z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")]' />
+					<div className='absolute top-0 left-0 w-full h-full opacity-2'>
+						<div className='absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,_white_1px,_transparent_0)]' 
+							 style={{ backgroundSize: '120px 120px' }} />
+					</div>
 					<div className='absolute top-10 right-10 w-96 h-96 bg-gradient-radial from-amber-500/8 to-transparent rounded-full blur-3xl' />
 					<div className='absolute bottom-10 left-10 w-80 h-80 bg-gradient-radial from-orange-500/6 to-transparent rounded-full blur-3xl' />
 				</div>
 
 				{/* Animated machinery elements */}
 				<div className='absolute top-20 left-20 opacity-5'>
-					<motion.div
-						animate={{ rotate: [0, 360] }}
-						transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-						className='w-32 h-32 text-amber-500/50'
-					>
+					<div className='rotating-machinery w-32 h-32 text-amber-500/50'>
 						<svg viewBox="0 0 24 24" fill="currentColor" className='w-full h-full'>
 							<path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z" />
 						</svg>
-					</motion.div>
+					</div>
 				</div>
 
-				<Container className='relative z-10'>
+				<Container className='relative z-10 latest-section'>
 					{/* Section header */}
-					<motion.div
-						initial={{ opacity: 0, y: -40 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.8 }}
-						className='text-center mb-20'
-					>
+					<div className='section-header text-center mb-20'>
 						{/* Industry badge */}
-						<motion.div
-							initial={{ scale: 0.8, opacity: 0 }}
-							whileInView={{ scale: 1, opacity: 1 }}
-							viewport={{ once: true }}
-							transition={{ delay: 0.2, duration: 0.6 }}
-							className='inline-flex items-center gap-4 px-8 py-4 rounded-full border border-amber-500/30 bg-gradient-to-r from-amber-500/10 to-orange-500/10 backdrop-blur-sm mb-8'
-						>
-							<motion.div
-								animate={{ 
-									scale: [1, 1.2, 1],
-									rotate: [0, 180, 360]
-								}}
-								transition={{ 
-									duration: 3, 
-									repeat: Infinity, 
-									ease: 'easeInOut' 
-								}}
-								className='w-4 h-4 bg-gradient-to-br from-amber-400 to-orange-500 rounded-sm'
-							/>
+						<div className='industry-badge inline-flex items-center gap-4 px-8 py-4 rounded-full border border-amber-500/30 bg-gradient-to-r from-amber-500/10 to-orange-500/10 backdrop-blur-sm mb-8'>
+							<div className='badge-icon w-4 h-4 bg-gradient-to-br from-amber-400 to-orange-500 rounded-sm' />
 							<span className='text-amber-300 font-bold text-sm uppercase tracking-[0.25em]'>
 								Technical Publications
 							</span>
@@ -73,32 +325,20 @@ export const LatestArticles: FC = () => {
 							<span className='text-gray-400 text-xs uppercase tracking-wider'>
 								Latest Research
 							</span>
-						</motion.div>
+						</div>
 
 						{/* Main heading */}
-						<motion.h2
-							initial={{ opacity: 0, y: 30 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ delay: 0.4, duration: 0.8 }}
-							className='text-6xl md:text-7xl font-black mb-6 leading-none'
-						>
+						<h2 className='main-heading text-6xl md:text-7xl font-black mb-6 leading-none'>
 							<span className='block bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent'>
 								Industry
 							</span>
 							<span className='block bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent mt-2'>
 								Intelligence
 							</span>
-						</motion.h2>
+						</h2>
 
 						{/* Subtitle with technical info */}
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ delay: 0.6, duration: 0.8 }}
-							className='max-w-4xl mx-auto'
-						>
+						<div className='subtitle-content max-w-4xl mx-auto'>
 							<p className='text-xl md:text-2xl text-gray-400 leading-relaxed mb-8'>
 								Expert insights on crushing technology, mixing innovations, and screening solutions from{' '}
 								<span className='text-amber-400 font-semibold'>industry leaders</span>
@@ -107,35 +347,25 @@ export const LatestArticles: FC = () => {
 							{/* Technical metrics */}
 							<div className='flex flex-wrap items-center justify-center gap-8 text-sm'>
 								<div className='flex items-center gap-2'>
-									<motion.div
-										animate={{ rotate: 360 }}
-										transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-										className='w-3 h-3 border border-amber-500 border-t-transparent rounded-full'
-									/>
+									<div className='rotating-spinner w-3 h-3 border border-amber-500 border-t-transparent rounded-full' />
 									<span className='text-gray-500'>Real-time Updates</span>
 								</div>
 								<div className='w-px h-4 bg-gray-600' />
 								<div className='flex items-center gap-2'>
-									<div className='w-2 h-2 rounded-full bg-green-500 animate-pulse' />
+									<div className='pulse-dot-green w-2 h-2 rounded-full bg-green-500' />
 									<span className='text-gray-500'>Expert Validated</span>
 								</div>
 								<div className='w-px h-4 bg-gray-600' />
 								<div className='flex items-center gap-2'>
-									<div className='w-2 h-2 rounded-full bg-blue-500 animate-pulse' />
+									<div className='pulse-dot-blue w-2 h-2 rounded-full bg-blue-500' />
 									<span className='text-gray-500'>Technical Focus</span>
 								</div>
 							</div>
-						</motion.div>
-					</motion.div>
+						</div>
+					</div>
 
 					{/* Articles container */}
-					<motion.div
-						initial={{ opacity: 0, y: 60 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ delay: 0.8, duration: 1 }}
-						className='relative'
-					>
+					<div className='articles-container relative'>
 						{/* Decorative side elements */}
 						<div className='absolute -left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-amber-500/50 via-orange-500/30 to-transparent rounded-full hidden lg:block' />
 						<div className='absolute -right-8 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-orange-500/30 to-amber-500/50 rounded-full hidden lg:block' />
@@ -143,100 +373,57 @@ export const LatestArticles: FC = () => {
 						{/* Articles grid */}
 						<div className='w-full mx-auto flex flex-col gap-6'>
 							{latestArticles.map((article, index) => (
-								<motion.div
+								<div
 									key={index}
-									initial={{ opacity: 0, x: index % 2 === 0 ? -60 : 60 }}
-									whileInView={{ opacity: 1, x: 0 }}
-									viewport={{ once: true }}
-									transition={{ 
-										delay: 0.1 * index, 
-										duration: 0.8,
-										type: 'spring',
-										stiffness: 100
-									}}
-									className='group relative'
+									className={`article-item-${index} group relative`}
 								>
 									{/* Article number indicator */}
-									<motion.div
-										whileHover={{ scale: 1.1, rotate: 5 }}
-										className='absolute -left-4 top-4 z-20 w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-xl shadow-amber-500/25'
-									>
+									<div className='article-number absolute -left-4 top-4 z-20 w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-xl shadow-amber-500/25'>
 										<span className='text-white font-black text-sm'>
 											{String(index + 1).padStart(2, '0')}
 										</span>
-									</motion.div>
+									</div>
 
 									{/* Glow effect on hover */}
-									<div className='absolute inset-0 bg-gradient-to-r from-amber-500/5 to-orange-500/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500' />
+									<div className='glow-effect absolute inset-0 bg-gradient-to-r from-amber-500/5 to-orange-500/5 rounded-2xl blur-xl' />
 
 									{/* Article wrapper with industrial styling */}
-									<div className='relative bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-2 hover:border-amber-500/30 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-amber-500/10'>
+									<div className='article-card relative bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-2'>
 										<ArticleCardCompact article={article} />
 									</div>
 
 									{/* Technical corner accents */}
-									<div className='absolute top-2 right-2 w-6 h-6 border-t-2 border-r-2 border-amber-500/30 rounded-tr-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-									<div className='absolute bottom-2 left-2 w-6 h-6 border-b-2 border-l-2 border-orange-500/30 rounded-bl-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-								</motion.div>
+									<div className='corner-accent absolute top-2 right-2 w-6 h-6 border-t-2 border-r-2 border-amber-500/30 rounded-tr-xl' />
+									<div className='corner-accent absolute bottom-2 left-2 w-6 h-6 border-b-2 border-l-2 border-orange-500/30 rounded-bl-xl' />
+								</div>
 							))}
 						</div>
-					</motion.div>
+					</div>
 
 					{/* Bottom section with call-to-action */}
-					<motion.div
-						initial={{ opacity: 0, y: 40 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ delay: 1.2, duration: 0.8 }}
-						className='text-center mt-20'
-					>
+					<div className='bottom-section text-center mt-20'>
 						{/* Technical separator */}
 						<div className='flex items-center justify-center gap-6 mb-8'>
 							<div className='w-24 h-px bg-gradient-to-r from-transparent to-amber-500/50' />
-							<motion.div
-								animate={{ 
-									rotate: [0, 360],
-									scale: [1, 1.1, 1]
-								}}
-								transition={{ 
-									duration: 6, 
-									repeat: Infinity,
-									ease: 'easeInOut'
-								}}
-								className='w-8 h-8 border-2 border-amber-500/30 border-t-amber-500 rounded-full'
-							/>
+							<div className='rotating-gear-1 w-8 h-8 border-2 border-amber-500/30 border-t-amber-500 rounded-full' />
 							<span className='text-sm font-medium text-gray-500 uppercase tracking-wider px-4'>
 								Advancing Industrial Technology
 							</span>
-							<motion.div
-								animate={{ 
-									rotate: [360, 0],
-									scale: [1, 1.1, 1]
-								}}
-								transition={{ 
-									duration: 6, 
-									repeat: Infinity,
-									ease: 'easeInOut',
-									delay: 3
-								}}
-								className='w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full'
-							/>
+							<div className='rotating-gear-2 w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full' />
 							<div className='w-24 h-px bg-gradient-to-l from-transparent to-orange-500/50' />
 						</div>
 
 						{/* CTA Button */}
-						<motion.button
-							whileHover={{ scale: 1.05, y: -2 }}
-							whileTap={{ scale: 0.95 }}
-							className='group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl font-bold text-white shadow-2xl shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-300'
-						>
+						<button className='cta-button group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl font-bold text-white shadow-2xl shadow-amber-500/25'>
 							<span className='relative z-10 flex items-center gap-3'>
 								Explore All Articles
-								
+								<svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+									<path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M13 7l5 5m0 0l-5 5m5-5H6' />
+								</svg>
 							</span>
-							<div className='absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-						</motion.button>
-					</motion.div>
+							<div className='button-overlay absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl' />
+						</button>
+					</div>
 				</Container>
 			</section>
 		)

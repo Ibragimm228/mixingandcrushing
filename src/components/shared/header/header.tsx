@@ -118,7 +118,7 @@ export function Header() {
 	return (
 		<header>
 			<MainHeader />
-			<SubHeader />
+		
 		</header>
 	)
 }

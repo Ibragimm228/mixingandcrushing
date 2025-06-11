@@ -1,7 +1,6 @@
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-import { motion } from 'framer-motion'
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -80,12 +79,101 @@ export function Hero() {
 					.hero-swiper .swiper-pagination-bullet-active::after {
 						opacity: 1;
 					}
+
+					/* Оптимизированные CSS анимации */
+					.slide-content {
+						animation: slideInUp 1s ease-out forwards;
+					}
+					
+					.industry-badge {
+						animation: fadeInLeft 0.8s ease-out 0.5s forwards;
+						opacity: 0;
+					}
+					
+					.main-title {
+						animation: fadeInUp 1s ease-out 0.7s forwards;
+						opacity: 0;
+					}
+					
+					.description {
+						animation: fadeInUp 0.8s ease-out 1s forwards;
+						opacity: 0;
+					}
+					
+					.stats-cta {
+						animation: fadeInUp 0.8s ease-out 1.3s forwards;
+						opacity: 0;
+					}
+
+					.cta-button {
+						transition: all 0.3s ease;
+					}
+					
+					.cta-button:hover {
+						transform: scale(1.05) translateX(10px);
+						box-shadow: 0 25px 50px -12px rgba(251, 191, 36, 0.4);
+					}
+					
+					.cta-button:active {
+						transform: scale(0.95);
+					}
+
+					.rotating-element {
+						animation: rotate 8s linear infinite;
+					}
+
+					.badge-icon {
+						animation: rotate 4s linear infinite;
+					}
+
+					@keyframes fadeInLeft {
+						from {
+							opacity: 0;
+							transform: translateX(-50px);
+						}
+						to {
+							opacity: 1;
+							transform: translateX(0);
+						}
+					}
+					
+					@keyframes fadeInUp {
+						from {
+							opacity: 0;
+							transform: translateY(30px);
+						}
+						to {
+							opacity: 1;
+							transform: translateY(0);
+						}
+					}
+					
+					@keyframes slideInUp {
+						from {
+							opacity: 0;
+							transform: translateY(50px);
+						}
+						to {
+							opacity: 1;
+							transform: translateY(0);
+						}
+					}
+
+					@keyframes rotate {
+						from {
+							transform: rotate(0deg);
+						}
+						to {
+							transform: rotate(360deg);
+						}
+					}
 				`}
 			</style>
 
-			{/* Animated background grid */}
+			{/* Упрощенный background */}
 			<div className='absolute inset-0 bg-slate-900'>
-				<div className='absolute inset-0 bg-[url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.03"%3E%3Ccircle cx="7" cy="7" r="1"/%3E%3Ccircle cx="27" cy="7" r="1"/%3E%3Ccircle cx="47" cy="7" r="1"/%3E%3Ccircle cx="7" cy="27" r="1"/%3E%3Ccircle cx="27" cy="27" r="1"/%3E%3Ccircle cx="47" cy="27" r="1"/%3E%3Ccircle cx="7" cy="47" r="1"/%3E%3Ccircle cx="27" cy="47" r="1"/%3E%3Ccircle cx="47" cy="47" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")]' />
+				<div className='absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_1px_1px,_white_1px,_transparent_0)]' 
+					 style={{ backgroundSize: '60px 60px' }} />
 			</div>
 
 			<Swiper
@@ -104,74 +192,44 @@ export function Hero() {
 				{slides.map((slide, index) => (
 					<SwiperSlide key={slide.id}>
 						<div className='relative w-full h-full'>
-							{/* Background image with parallax effect */}
-							<motion.div
-								initial={{ scale: 1.1 }}
-								animate={{ scale: 1 }}
-								transition={{ duration: 2, ease: 'easeOut' }}
+							{/* Background image */}
+							<div
 								className='absolute inset-0 bg-cover bg-center'
 								style={{ backgroundImage: `url(${slide.image})` }}
 							/>
 							
-							{/* Gradient overlays */}
+							{/* Объединенные overlays */}
 							<div className='absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/70 to-slate-900/40' />
 							<div className='absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-slate-900/30' />
-
-							{/* Industrial pattern overlay */}
-							<div className='absolute inset-0 bg-[url("data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.02"%3E%3Cpath d="M50 50L25 25L50 0L75 25L50 50Z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")] opacity-20' />
 							
 							{/* Content */}
 							<div className='relative z-10 flex flex-col justify-center h-full px-8 md:px-16 lg:px-24'>
-								<div className='max-w-4xl'>
+								<div className='max-w-4xl slide-content'>
 									{/* Industry badge */}
-									<motion.div
-										initial={{ opacity: 0, x: -50 }}
-										animate={{ opacity: 1, x: 0 }}
-										transition={{ delay: 0.5, duration: 0.8 }}
-										className='inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 backdrop-blur-sm mb-6'
-									>
-										<motion.div
-											animate={{ rotate: [0, 360] }}
-											transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-											className='w-3 h-3 rounded-sm bg-gradient-to-br from-amber-400 to-orange-500'
-										/>
+									<div className='industry-badge inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 backdrop-blur-sm mb-6'>
+										<div className='badge-icon w-3 h-3 rounded-sm bg-gradient-to-br from-amber-400 to-orange-500' />
 										<span className='text-amber-300 font-bold text-sm uppercase tracking-[0.2em]'>
 											{slide.subtitle}
 										</span>
-									</motion.div>
+									</div>
 
 									{/* Main title */}
-									<motion.h1
-										initial={{ opacity: 0, y: 50 }}
-										animate={{ opacity: 1, y: 0 }}
-										transition={{ delay: 0.7, duration: 1 }}
-										className='text-5xl md:text-7xl lg:text-8xl font-black leading-none mb-6'
-									>
+									<h1 className='main-title text-5xl md:text-7xl lg:text-8xl font-black leading-none mb-6'>
 										<span className='block bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent'>
 											{slide.title.split(' ').slice(0, -1).join(' ')}
 										</span>
 										<span className='block bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent mt-2'>
 											{slide.title.split(' ').slice(-1)[0]}
 										</span>
-									</motion.h1>
+									</h1>
 
 									{/* Description */}
-									<motion.p
-										initial={{ opacity: 0, y: 30 }}
-										animate={{ opacity: 1, y: 0 }}
-										transition={{ delay: 1, duration: 0.8 }}
-										className='text-xl md:text-2xl lg:text-3xl text-gray-300 leading-relaxed mb-8 max-w-3xl'
-									>
+									<p className='description text-xl md:text-2xl lg:text-3xl text-gray-300 leading-relaxed mb-8 max-w-3xl'>
 										{slide.description}
-									</motion.p>
+									</p>
 
 									{/* Stats and CTA */}
-									<motion.div
-										initial={{ opacity: 0, y: 30 }}
-										animate={{ opacity: 1, y: 0 }}
-										transition={{ delay: 1.3, duration: 0.8 }}
-										className='flex flex-col sm:flex-row items-start sm:items-center gap-6'
-									>
+									<div className='stats-cta flex flex-col sm:flex-row items-start sm:items-center gap-6'>
 										{/* Stat display */}
 										<div className='flex items-center gap-4'>
 											<div className='text-center'>
@@ -186,34 +244,27 @@ export function Hero() {
 										</div>
 
 										{/* CTA Button */}
-										<motion.button
-											whileHover={{ scale: 1.05, x: 10 }}
-											whileTap={{ scale: 0.95 }}
-											className='group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl font-bold text-white shadow-2xl shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-300'
-										>
+										<button className='cta-button group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl font-bold text-white shadow-2xl shadow-amber-500/25'>
 											<span className='relative z-10 flex items-center gap-3'>
-												
+												Explore Solutions
+												<svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
 													<path
 														strokeLinecap='round'
 														strokeLinejoin='round'
 														strokeWidth='2'
 														d='M13 7l5 5m0 0l-5 5m5-5H6'
 													/>
-												
+												</svg>
 											</span>
 											<div className='absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-										</motion.button>
-									</motion.div>
+										</button>
+									</div>
 								</div>
 							</div>
 
-							{/* Animated technical elements */}
+							{/* Упрощенные технические элементы */}
 							<div className='absolute bottom-8 left-8 flex items-center gap-4 text-gray-400'>
-								<motion.div
-									animate={{ rotate: 360 }}
-									transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-									className='w-8 h-8 border-2 border-amber-500/30 border-t-amber-500 rounded-full'
-								/>
+								<div className='rotating-element w-8 h-8 border-2 border-amber-500/30 border-t-amber-500 rounded-full' />
 								<span className='text-sm font-medium uppercase tracking-wider'>
 									Industrial Engineering
 								</span>
