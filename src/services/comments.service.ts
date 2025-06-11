@@ -22,7 +22,7 @@ class CommentsService {
 		const comments = [...(article.comments || []), newComment]
 
 		const { error } = await supabase
-			.from('rucksack_articles')
+			.from('china_articles')
 			.update({ comments })
 			.eq('id', articleId)
 			.select()
