@@ -405,23 +405,11 @@ export function Hero() {
 															{slide.stats.label}
 														</div>
 													</div>
-													<div className='w-px h-16 bg-gradient-to-b from-amber-500/50 to-orange-500/50' />
+													
 												</div>
 
 												{/* CTA Button */}
-												<button 
-													onClick={() => window.location.href = '/blog'} 
-													className='cta-button group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl font-bold text-white shadow-2xl shadow-amber-500/25'
-													type='button'
-												> 
-													<span className='relative z-10 flex items-center gap-3'> 
-														Explore Solutions 
-														<svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'> 
-															<path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M13 7l5 5m0 0l-5 5m5-5H6' /> 
-														</svg> 
-													</span> 
-													<div className='absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300' /> 
-												</button>
+												
 											</div>
 										</div>
 									</div>

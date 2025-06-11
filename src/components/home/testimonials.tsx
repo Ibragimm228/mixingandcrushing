@@ -3,7 +3,7 @@ import { Container } from '../shared/container'
 
 const testimonials = [
 	{
-		name: 'Marcus Thompson',
+		name: 'Ryan Hall',
 		role: 'Chief Mining Engineer',
 		company: 'Global Mining Corp',
 		image: '/logan.jpg',
@@ -11,7 +11,7 @@ const testimonials = [
 		equipment: 'Jaw Crushers & Cone Crushers'
 	},
 	{
-		name: 'Sarah Chen',
+		name: 'Amelia Reed',
 		role: 'Plant Operations Manager',
 		company: 'Industrial Solutions Ltd',
 		image: '/clifford.jpg',
@@ -19,7 +19,7 @@ const testimonials = [
 		equipment: 'High-Intensity Mixers'
 	},
 	{
-		name: 'David Rodriguez',
+		name: 'Caleb Hughes',
 		role: 'Process Engineering Director',
 		company: 'Advanced Materials Inc',
 		image: 'https://i.pinimg.com/1200x/f6/f6/89/f6f689ebfa3fd1a3cf080e0fabb5615a.jpg',
